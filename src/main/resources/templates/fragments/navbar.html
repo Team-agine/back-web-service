@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <title>Pour importation du menu</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+    <a class="navbar-brand" th:href="@{/}">Accueil</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/vehicles}">Afficher la liste des véhicules</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/vehicles/new}">Ajouter un véhicule</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

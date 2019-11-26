@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <title>LocaCars</title>
+    <th:block th:insert="~{fragments/link::link}"/>
+</head>
+<body>
+<h1 class="text-center">Location de véhicules</h1>
+
+<th:block th:insert="~{fragments/navbar::#navbar}"/>
+
+<div class="container mt-3">
+    <h2 class="text-center">Ajouter un véhicule</h2>
+
+    <form action="#" th:action="@{/vehicles/new}" th:object="${vehicle}" method="POST">
+        <div class="form-group">
+            <label for="brand">Immatriculation  du véhicule :</label>
+            <input type="text" th:field="*{id}" class="form-control" id="immat" />
+        </div>
+
+        <div class="form-group">
+            <label for="brand">Marque du véhicule :</label>
+            <input type="text" th:field="*{brand}" class="form-control" id="brand" />
+        </div>
+        <div th:if="${#fields.hasErrors('brand')}" class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <div th:errors="*{brand}" />
+        </div>
+
+        <div class="form-group">
+            <label for="type">Modèle du véhicule :</label>
+            <input type="text" th:field="*{type}" class="form-control" id="type" />
+        </div>
+        <div th:if="${#fields.hasErrors('type')}" class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <div th:errors="*{type}" />
+        </div>
+
+        <div class="form-group">
+            <label for="type">Couleur du véhicule :</label>
+            <input type="text" th:field="*{color}" class="form-control" id="color" />
+        </div>
+
+        <div class="form-group">
+            <label for="type">prix de base du véhicule :</label>
+            <input type="number" th:field="*{basePrice}" class="form-control" id="basePrice" />
+        </div>
+
+        <div class="form-group">
+            <label for="type">Prix au km du véhicule :</label>
+            <input type="number" th:field="*{kmPrice}" class="form-control" id="kmPrice" />
+        </div>
+
+        <div class="form-group">
+            <label for="type">Puissance fiscal du véhicule :</label>
+            <input type="number" th:field="*{horsePower}" class="form-control" id="horsePower" />
+        </div>
+
+        <input type="submit" value="Enregistrer" class="btn btn-primary" />
+    </form>
+</div>
+
+<th:block th:insert="~{fragments/script::script}"/>
+
+</body>
+
+</html>

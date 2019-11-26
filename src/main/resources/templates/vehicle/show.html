@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <title>LocaCars</title>
+    <th:block th:insert="~{fragments/link::link}"/>
+</head>
+<body>
+<h1 class="text-center">Location de véhicules</h1>
+
+<th:block th:insert="~{fragments/navbar::#navbar}"/>
+
+<div class="container mt-3">
+    <h2 class="text-center">Liste des véhicules</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Identifiant</th>
+            <th>Marque</th>
+            <th>Modèle</th>
+            <th>Couleur</th>
+            <th>Puissance fiscal</th>
+            <th>prix de base</th>
+            <th>prix au kilomètre</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vehicle : ${vehicles}">
+            <td th:utext="${vehicle.getId()}">...</td>
+            <td th:utext="${vehicle.getBrand()}">...</td>
+            <td th:utext="${vehicle.getType()}">...</td>
+            <td th:utext="${vehicle.getColor()}">...</td>
+            <td th:utext="${vehicle.getHorsePower()}">...</td>
+            <td th:utext="${vehicle.getBasePrice()}">...</td>
+            <td th:utext="${vehicle.getKmPrice()}">...</td>
+            <td><a href="#" class="delete" th:data-link="@{'/vehicles/' + ${vehicle.getId()}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <div th:if="${#strings.equals(status_service,'SERVICE_UNAVAILABLE')}" class="alert alert-info alert-dismissible">-->
+<!--        <button type="button" class="close" data-dismiss="alert">&times;</button>-->
+<!--        Service momentanément indisponible. Merci de réessayer plus tard ...-->
+<!--    </div>-->
+</div>
+
+<th:block th:insert="~{fragments/script::script}"/>
+
+</body>
+
+</html>
