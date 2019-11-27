@@ -3,14 +3,14 @@ package com.vehiculerental.backwebservice.controller;
 
 import com.vehiculerental.backwebservice.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -68,10 +68,35 @@ public class VehiclesController {
     }
 
     @DeleteMapping(value = "/vehicles/{id}")
-    public String remove(@PathVariable Integer id) {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "http://vehicles-api/vehicles" + id;
+    public String remove(@PathVariable String id) {
+        String url = "http://vehicles-api/vehicles/" + id;
         restTemplate.delete(url);
-        return "redirect:/vehicles";    }
+        return "vehicle/show";    }
+
+
+    @RequestMapping(value = { "/updatevehicles/{id}" }, method = RequestMethod.GET)
+    public String carModif(@PathVariable String id, Model model) {
+        String url = "http://vehicles-api/vehicles/"+id;
+        Vehicle vehicle = restTemplate.getForObject(url, Vehicle.class);
+        model.addAttribute("vehicle", vehicle);
+
+
+        return "vehicle/update";
+    }
+
+    @PostMapping(value = { "/modifVoiture/{id}" })
+    public String modifCar(Model model, //
+                           @ModelAttribute("vehicle") Vehicle vehicle, @PathVariable String id) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<Vehicle> request = new HttpEntity<Vehicle>(vehicle, headers);
+            String url = "http://vehicles-api/vehicles/" + id;
+            restTemplate.put(url, request, Vehicle.class);
+
+            return "redirect:/vehicles";
+
+    }
 
 }

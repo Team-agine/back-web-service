@@ -11,32 +11,34 @@
 <th:block th:insert="~{fragments/navbar::#navbar}"/>
 
 <div class="container mt-3">
-    <a class="button" th:href="@{/vehicles/new}">Ajouter un véhicule</a>
-    <h2 class="text-center">Liste des véhicules</h2>
+    <a class="button" th:href="@{/users/new}">Ajouter un Utilisateur</a>
+    <h2 class="text-center">Liste des Utilisateur</h2>
 
     <table class="table">
         <thead>
         <tr>
             <th>Identifiant</th>
-            <th>Marque</th>
-            <th>Modèle</th>
-            <th>Couleur</th>
-            <th>Puissance fiscal</th>
-            <th>prix de base</th>
-            <th>prix au kilomètre</th>
+            <th>Nom</th>
+            <th>prénom</th>
+            <th>Date de naissance</th>
+            <th>Date de permis de conduire</th>
+            <th>Numéros de permis de conduire</th>
+            <th>email</th>
+            <th>password</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="vehicle : ${vehicles}">
-            <td th:utext="${vehicle.getId()}">...</td>
-            <td th:utext="${vehicle.getBrand()}">...</td>
-            <td th:utext="${vehicle.getType()}">...</td>
-            <td th:utext="${vehicle.getColor()}">...</td>
-            <td th:utext="${vehicle.getHorsePower()}">...</td>
-            <td th:utext="${vehicle.getBasePrice()}">...</td>
-            <td th:utext="${vehicle.getKmPrice()}">...</td>
-            <td><a href="#" class="delete" th:data-link="@{'/vehicles/' + ${vehicle.getId()}}">Delete</a></td>
-            <td><a th:href="@{'/updatevehicles/'+${vehicle.getId()}}">Update Car</a></td>
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.getId()}">...</td>
+            <td th:utext="${user.getLastName()}">...</td>
+            <td th:utext="${user.getFirstName()}">...</td>
+            <td th:utext="${user.getBirthDate()}">...</td>
+            <td th:utext="${user.getLicenseDate()}">...</td>
+            <td th:utext="${user.getLicenseNumber()}">...</td>
+            <td th:utext="${user.getEmail()}">...</td>
+            <td th:utext="${user.getPassword()}">...</td>
+            <td><a href="#" class="delete" th:data-link="@{'/users/' + ${user.getId()}}">Delete</a></td>
+            <td><a th:href="@{'/updateusers/'+${user.getId()}}">Update User</a></td>
         </tr>
         </tbody>
     </table>
