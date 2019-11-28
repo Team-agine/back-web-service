@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <title>LocaCars</title>
+    <th:block th:insert="~{fragments/link::link}"/>
+</head>
+<body>
+<h1 class="text-center">Location de véhicules</h1>
+
+<th:block th:insert="~{fragments/navbar::#navbar}"/>
+
+<div class="container mt-3">
+    <a class="button" th:href="@{/bookings/new}">Ajouter une Reservation</a>
+    <h2 class="text-center">Liste des Reservation</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Identifiant</th>
+            <th>prix de base</th>
+            <th>Date de confirmation</th>
+            <th>date de début</th>
+            <th>Date de fin</th>
+            <th>Nb km estimer</th>
+            <th>confirmation de la réservation</th>
+            <th>client id</th>
+            <th>véhicule id</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking : ${bookings}">
+            <td th:utext="${booking.getId()}">...</td>
+            <td th:utext="${booking.getBasePrice()}">...</td>
+            <td th:utext="${booking.getConfirmationDate()}">...</td>
+            <td th:utext="${booking.getStartDate()}">...</td>
+            <td th:utext="${booking.getEndDate()}">...</td>
+            <td th:utext="${booking.getEstimatedKm()}">...</td>
+            <td th:utext="${booking.getOrderIsConfirmed()}">...</td>
+            <td th:utext="${booking.getUserId()}">...</td>
+            <td th:utext="${booking.getVehicleId()}">...</td>
+            <td><a href="#" class="delete" th:data-link="@{'/bookings/' + ${booking.getId()}}">Delete</a></td>
+            <td><a th:href="@{'/updatebookings/'+${booking.getId()}}">Update Booking</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <div th:if="${#strings.equals(status_service,'SERVICE_UNAVAILABLE')}" class="alert alert-info alert-dismissible">-->
+<!--        <button type="button" class="close" data-dismiss="alert">&times;</button>-->
+<!--        Service momentanément indisponible. Merci de réessayer plus tard ...-->
+<!--    </div>-->
+</div>
+
+<th:block th:insert="~{fragments/script::script}"/>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $('.delete').on("click", (e) => {
+        e.preventDefault();
+    var link = $(e.target).data('link');
+    $.ajax({
+        url: link,
+        method: 'delete',
+
+
+        success: function () {
+            location.reload();
+        }
+    })
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <title>LocaCars</title>
+    <th:block th:insert="~{fragments/link::link}"/>
+</head>
+<body>
+<h1 class="text-center">Location de véhicules</h1>
+
+<th:block th:insert="~{fragments/navbar::#navbar}"/>
+
+<div class="container mt-3">
+    <h2 class="text-center">Ajouter une réservation</h2>
+    <form action="#" th:action="@{/bookings/prepare}" th:object="${booking}" method="POST">
+
+        <div class="form-group">
+            <label>Choisissez votre voiture :</label>
+            <select>
+                <option th:each="vehicle : ${vehicles}" th:utext="${vehicle.brand}+' '+${vehicle.getType()}" th:value="${vehicle.getId()}">...
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>id client :</label>
+            <input type="text" th:field="*{userId}" th:value="${booking.userId}" class="form-control" id="userId"/>
+        </div>
+        <div class="form-group">
+            <label>date de début :</label>
+            <input type="text" th:field="*{startDate}" th:value="${booking.startDate}" class="form-control" id="lastname"/>
+        </div>
+
+        <div>
+            <label >date de fin :</label>
+            <input type="text" th:field="*{endDate}" th:value="${booking.endDate}" class="form-control" id="endDate"/>
+        </div>
+        <div>
+            <label >Km estimé :</label>
+            <input type="number" th:field="*{estimatedKm}" class="form-control" id="estimatedKm"/>
+        </div>
+
+        <input type="submit" value="Enregistrer" class="btn btn-primary"/>
+    </form>
+
+
+</div>
+
+<th:block th:insert="~{fragments/script::script}"/>
+
+</body>
+
+</html>

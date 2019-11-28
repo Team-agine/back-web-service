@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <title>LocaCars</title>
+    <th:block th:insert="~{fragments/link::link}"/>
+</head>
+<body>
+<h1 class="text-center">Location de véhicules</h1>
+
+<th:block th:insert="~{fragments/navbar::#navbar}"/>
+
+<div class="container mt-3">
+    <h2 class="text-center">Ajouter une réservation</h2>
+
+    <form action="#" th:action="@{/bookings/new}" th:object="${booking}" method="POST">
+
+        <div class="form-group">
+            <label for="firstname">Client Id :</label>
+            <input type="text" th:field="*{userId}" class="form-control" id="firstname" />
+        </div>
+
+        <div class="form-group">
+            <label for="lastname">date de début :</label>
+            <input type="text" th:field="*{startDate}" class="form-control" id="lastname" />
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate">date de fin :</label>
+            <input type="text" th:field="*{endDate}" class="form-control" id="birthDate" />
+        </div>
+
+        <input type="submit" value="Enregistrer" class="btn btn-primary" />
+    </form>
+</div>
+
+<th:block th:insert="~{fragments/script::script}"/>
+
+</body>
+
+</html>
